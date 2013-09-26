@@ -8,6 +8,8 @@ public interface UserMapper {
 
    public User findUserById(Long id);
 
+   public User findById(Long id);;
+
    public List<User> findAll();
 
 }

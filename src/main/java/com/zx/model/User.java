@@ -1,6 +1,5 @@
 package com.zx.model;
 
-
 public class User {
    private Integer id;
    private String userName;
@@ -41,6 +40,7 @@ public class User {
 
    @Override
    public String toString() {
-      return "userName:" + userName + "------loginName:" + loginName;
+      return "userName:" + userName + "------loginName:" + loginName
+            + "------classesName:" + classes.getName();
    }
 }

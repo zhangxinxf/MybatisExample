@@ -16,7 +16,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 
-import com.zx.model.User;
+import com.zx.model.Classes;
 
 public class Run {
 
@@ -61,15 +61,24 @@ public class Run {
          SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder()
                .build(inputStream);
          session = sqlSessionFactory.openSession();
-         UserMapper mapper = session.getMapper(UserMapper.class);
-         User user = mapper.findUserById(1L);
          /*
-          * User user = session.selectOne("com.zx.dao.UserMapper.findUserById",
-          * 1L); List<User> userList = mapper.findAll(); for (User user :
-          * userList) { }
+          * UserMapper mapper = session.getMapper(UserMapper.class); User user =
+          * mapper.findUserById(1L);
+          * System.out.println(user.getClasses().getName());
+          * System.out.println(user.toString()); User user =
+          * session.selectOne("com.zx.dao.UserMapper.findUserById", 1L);
+          * List<User> userList = mapper.findAll(); for (User user : userList) {
+          * } //
           */
-         System.out.println(user.getClasses().getName());
-         System.out.println(user.toString());
+         // Long startTime = System.currentTimeMillis();
+         // UserMapper mapper = session.getMapper(UserMapper.class);
+         // User user = mapper.findUserById(1L);
+         // System.out.println(user);
+         // Long endTime = System.currentTimeMillis();
+         // System.out.println(endTime-startTime);
+          ClassesMapper classesMapper =
+          session.getMapper(ClassesMapper.class);
+         Classes classes = classesMapper.findById(1);
 
       } catch (IOException exception) {
          exception.printStackTrace();

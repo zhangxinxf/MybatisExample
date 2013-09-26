@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias("Classes")
 public class Classes {
    private Long id;
    private String name;
