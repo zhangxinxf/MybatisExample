@@ -2,6 +2,9 @@ package com.zx.dao;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Reader;
+import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -10,13 +13,16 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.jdbc.SelectBuilder;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 
 import com.zx.model.Classes;
+import com.zx.model.User;
 
 public class Run {
 
@@ -54,9 +60,11 @@ public class Run {
    }
 
    public static void main(String[] args) {
-      String resource = "com/zx/model/mybatis-config.xml";
+      String resource = "conf/mybatis-config.xml";
       SqlSession session = null;
       try {
+         Reader reader = null;  
+                     reader = Resources.getResourceAsReader(resource);  
          InputStream inputStream = Resources.getResourceAsStream(resource);
          SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder()
                .build(inputStream);
@@ -76,13 +84,22 @@ public class Run {
          // System.out.println(user);
          // Long endTime = System.currentTimeMillis();
          // System.out.println(endTime-startTime);
-          ClassesMapper classesMapper =
-          session.getMapper(ClassesMapper.class);
-         Classes classes = classesMapper.findById(1);
 
+         ClassesMapper classesMapper = session.getMapper(ClassesMapper.class);
+         HashMap<String, Object> data = new HashMap<String, Object>();
+         data.put("name", "高三四班");
+         classesMapper.insert(data);
+         //
+         // Classes classes = classesMapper.findById(1);
+         // System.out.println(classes.toString());
+         // List<User> users = classes.getUsers();
+         // for (User user : users) {
+         // System.err.println(user.toString());
+         // }
       } catch (IOException exception) {
          exception.printStackTrace();
       } finally {
+         session.commit();
          if (session != null) {
             session.close();
          }

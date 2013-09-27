@@ -3,8 +3,6 @@ package com.zx.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.ibatis.type.Alias;
-
 public class Classes {
    private Long id;
    private String name;
@@ -32,5 +30,10 @@ public class Classes {
 
    public void setName(String name) {
       this.name = name;
+   }
+
+   @Override
+   public String toString() {
+      return "id:\t" + id + "\nname:\t" + name;
    }
 }
