@@ -2,8 +2,6 @@ package com.zx.dao;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Reader;
-import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -13,9 +11,7 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.jdbc.SelectBuilder;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -60,11 +56,9 @@ public class Run {
    }
 
    public static void main(String[] args) {
-      String resource = "conf/mybatis-config.xml";
+      String resource = "com/zx/model/mybatis-config.xml";
       SqlSession session = null;
       try {
-         Reader reader = null;  
-                     reader = Resources.getResourceAsReader(resource);  
          InputStream inputStream = Resources.getResourceAsStream(resource);
          SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder()
                .build(inputStream);
@@ -78,18 +72,18 @@ public class Run {
           * List<User> userList = mapper.findAll(); for (User user : userList) {
           * } //
           */
-         // Long startTime = System.currentTimeMillis();
-         // UserMapper mapper = session.getMapper(UserMapper.class);
-         // User user = mapper.findUserById(1L);
-         // System.out.println(user);
+//         Long startTime = System.currentTimeMillis();
+         UserMapper mapper = session.getMapper(UserMapper.class);
+         User user = mapper.findById(1L);
+         System.out.println(user);
          // Long endTime = System.currentTimeMillis();
          // System.out.println(endTime-startTime);
+         // ClassesMapper classesMapper =
+         // session.getMapper(ClassesMapper.class);
+         // HashMap<String, Object> data = new HashMap<String, Object>();
+         // data.put("name", "高三四班");
+         // classesMapper.insert(data);
 
-         ClassesMapper classesMapper = session.getMapper(ClassesMapper.class);
-         HashMap<String, Object> data = new HashMap<String, Object>();
-         data.put("name", "高三四班");
-         classesMapper.insert(data);
-         //
          // Classes classes = classesMapper.findById(1);
          // System.out.println(classes.toString());
          // List<User> users = classes.getUsers();
