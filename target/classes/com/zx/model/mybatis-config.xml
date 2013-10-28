@@ -7,6 +7,8 @@
 	<properties resource="com/zx/model/jdbc.properties" />
 	<!-- 设置加载方式 -->
 	<settings>
+		<!--表明重用预编译的SQL语句 -->
+		<setting name="defaultExecutorType" value="REUSE" />
 		<setting name="lazyLoadingEnabled" value="false" />
 	</settings>
 	<!-- 别名 -->
@@ -28,7 +30,7 @@
 	<!-- 扫描配置文件 -->
 	<mappers>
 		<package name="com.zx.dao" />
-<!-- 		<mapper resource="com/zx/model/UserMapper.xml" /> -->
-<!-- 		<mapper resource="com/zx/model/ClassesMapper.xml" /> -->
+		<!-- <mapper resource="com/zx/model/UserMapper.xml" /> -->
+		<!-- <mapper resource="com/zx/model/ClassesMapper.xml" /> -->
 	</mappers>
 </configuration>

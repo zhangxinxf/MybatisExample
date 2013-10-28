@@ -2,6 +2,7 @@ package com.zx.dao;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -17,6 +18,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 
 import com.zx.model.Classes;
+import com.zx.model.User;
 
 public class Run {
 
@@ -70,19 +72,28 @@ public class Run {
           * List<User> userList = mapper.findAll(); for (User user : userList) {
           * } //
           */
-         // Long startTime = System.currentTimeMillis();
-         // UserMapper mapper = session.getMapper(UserMapper.class);
-         // User user = mapper.findUserById(1L);
-         // System.out.println(user);
+//         Long startTime = System.currentTimeMillis();
+         UserMapper mapper = session.getMapper(UserMapper.class);
+         User user = mapper.findById(1L);
+         System.out.println(user);
          // Long endTime = System.currentTimeMillis();
          // System.out.println(endTime-startTime);
-          ClassesMapper classesMapper =
-          session.getMapper(ClassesMapper.class);
-         Classes classes = classesMapper.findById(1);
+         // ClassesMapper classesMapper =
+         // session.getMapper(ClassesMapper.class);
+         // HashMap<String, Object> data = new HashMap<String, Object>();
+         // data.put("name", "高三四班");
+         // classesMapper.insert(data);
 
+         // Classes classes = classesMapper.findById(1);
+         // System.out.println(classes.toString());
+         // List<User> users = classes.getUsers();
+         // for (User user : users) {
+         // System.err.println(user.toString());
+         // }
       } catch (IOException exception) {
          exception.printStackTrace();
       } finally {
+         session.commit();
          if (session != null) {
             session.close();
          }
